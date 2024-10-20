@@ -6,24 +6,22 @@ function setup() {
     frameRate(10);
 }
 
-let angle = 0;
 let panel_1_bits = [];
 let panel_2_bits = [];
-
-function csc(x) {
-    return 1 / Math.sin(x);
-}
 
 let color_func = function(x, y, i, t) {
     // return x % 3 * y % 5;
     // return random() > 0.5 ? 1 : 0;
     // return sin(x + t) * cos(y + t); // doesnt work
-    return 14*sin(t/10)-10+x
+    // return 14*sin(t/10)-10+x
+    return 1
 }
 
 function draw() {
 
     background(220);
+
+    print(frameCount);
 
     draw_tixy_grid(color_func);
     
