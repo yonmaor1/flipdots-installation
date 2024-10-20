@@ -1,6 +1,8 @@
 # p5-flipdots
 an API to allow p5.js to control a flip-dot display
 
+![Demo](./docs/tixy_demo.gif)
+
 ## setup instructions
 fire up your favorite terminal, cd somewhere comfortable and clone this repo
 ```
