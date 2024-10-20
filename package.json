@@ -1,0 +1,30 @@
+{
+  "name": "p5-flipdots",
+  "version": "1.0.0",
+  "description": "an API to allow p5.js to control a flip-dot display",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonmaor1/p5-flipdots.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yonmaor1/p5-flipdots/issues"
+  },
+  "homepage": "https://github.com/yonmaor1/p5-flipdots#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "serialport": "^12.0.0"
+  }
+}
