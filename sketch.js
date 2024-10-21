@@ -1,77 +1,51 @@
 /** inspired by https://tixy.land/ */
+// Includes the library: 
+// https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js
 
-let TEXT_X;
-let TEXT_Y;
 
-let function_field;
-
-let ts = 32;
-let longest_line = '// input must be valid javascript expression'
-let text_width;
-let char_width;
-
-function setup() {
-    createCanvas(windowWidth, windowHeight);
-    rectMode(CENTER);
-
-    frameRate(15);
-
-    textSize(ts);
-    textFont('monospace');
-
-    text_width = textWidth(longest_line);
-    char_width = textWidth('m');
-
-    TEXT_X = width / 2;
-    TEXT_Y = 0.78 * height;
-
-    function_field = createInput(f_str)
-    // function_field.attribute('placeholder', 'your name')
-    function_field.size(text_width)
-    function_field.position(TEXT_X - text_width / 2, TEXT_Y + 1.8 * ts);
-}
-
+const ENABLE_TX = false;
+const NUM_COLS = 28; // Don't change
+const NUM_ROWS = 14; // Don't change
 let panel_1_bits = [];
 let panel_2_bits = [];
+let function_field;
+let canvas;
 
 let f_str = 'Math.sin(t-Math.sqrt((x-7.5)**2+(y-6)**2))';
-let color_func = eval(`(x, y, i, t) => ${f_str}`);
+let color_func = eval(`(x,y,i,t) => ${f_str}`);
+
+function setup() {
+    canvas = createCanvas(800, 600);
+    frameRate(15);
+    textFont('monospace');
+    function_field = createElement('textarea');
+    function_field.size(750, 100);
+    function_field.position(20, height - 120);
+    function_field.style('font-size', '16px'); // Adjust the font size here
+    function_field.value(f_str);
+    windowResized();
+}
 
 function is_valid_function(f_str) {
     try {
-      // Try to create a new function with the provided string
-      let test_f = new Function(`return (x, y, i, t) => ${f_str}`);
-      test_f()(0,0,0,0);
-      return true;
+        // Try to create a new function with the provided string
+        let test_f = new Function(`return (x, y, i, t) => ${f_str}`);
+        test_f()(0, 0, 0, 0);
+        return true;
     } catch (e) {
-      return false;
+        return false;
     }
-  }
+}
 
-function func_input(draw_x, draw_y) {
-
-
-    push();
-    translate(draw_x, draw_y);
-
-    noStroke();
-    fill('white');
-    translate(-text_width / 2, 0);
-
-    text(longest_line, 0, 0);
-    text("(x, y, i, t) =>", 0, 1.4 * ts);
-    // text(f_str, 0, 1.4 * ts * 2);
+function func_input() {
 
     let prev_f_str = f_str;
     f_str = function_field.value();
     if (is_valid_function(f_str)) {
         try {
-            print(f_str);
             color_func = eval(`(x, y, i, t) => ${f_str}`);
         } catch (e) { // probably in the middle of typing
-            print("nope, reverting...")
             try {
-                print(prev_f_str);
                 color_func = eval(`(x, y, i, t) => ${prev_f_str}`);
                 f_str = prev_f_str;
             } catch (e) { // something went wrong
@@ -80,42 +54,52 @@ function func_input(draw_x, draw_y) {
             }
         }
     } else {
-        print("invalid functions string, reverting...")
         color_func = eval(`(x, y, i, t) => ${prev_f_str}`);
         f_str = prev_f_str;
     }
 
-    pop();
+}
+
+
+function windowResized() {
+    let canvasX = canvas.position().x;
+    let canvasY = canvas.position().y;
+    function_field.position(canvasX + 20, canvasY + height - 120);
+}
+
+function keyPressed() {
+
 }
 
 function draw() {
-
     background(0);
+    noStroke();
+    fill(64);
+    rect(0, 0, width, height);
 
-    func_input(TEXT_X, TEXT_Y);
-
+    draw_info();
+    func_input()
     draw_tixy_grid(color_func);
-
     process_and_send_signal()
 }
 
-const NUM_COLS = 28;
-const NUM_ROWS = 14;
+function draw_info() {
+    noStroke();
+    fill('white');
+    textSize(16);
+    let displayStr = "// input must be valid javascript expression\n";
+    displayStr += "(x,y,i,t) =>";
+    text(displayStr, 20, height - 150);
+}
 
 function draw_tixy_grid(f) {
-
     panel_1_bits = [];
     panel_2_bits = [];
-
-    push()
-    let w = min((width * 0.75) / NUM_COLS, 37);
-    translate(width / 2 - NUM_COLS / 2 * w, height / 2 - NUM_ROWS * 0.6 * w);
 
     for (let x = 0; x < NUM_COLS; x++) {
         for (let y = 0; y < NUM_ROWS; y++) {
             let i = x + y * NUM_COLS;
             let t = frameCount;
-
             let bit = draw_tixy_cell(x, y, i, t, f);
 
             if (y == 0) {
@@ -131,28 +115,27 @@ function draw_tixy_grid(f) {
             }
         }
     }
-    pop();
 }
 
 function draw_tixy_cell(x, y, i, t, f) {
-    let w = min((width * 0.75) / NUM_COLS, 37);
-    push();
-    translate(x * w, y * w);
+    let margin = 30;
+    let gridAreaWidth = (width - 2 * margin);
+    let cellSize = gridAreaWidth / NUM_COLS;
 
-    let v = f(x, y, i, t) > 0 ? 1 : 0;
+    let px = x * cellSize + (cellSize / 2) + margin;
+    let py = y * cellSize + (cellSize / 2) + margin;
+
+    let v = (f(x, y, i, t) > 0) ? 1 : 0;
     let c = v ? 'white' : 'black';
-    let s = 'white';
+    let s = v ? 'black' : 'white';
 
     fill(c);
-    stroke(s);
-    ellipse(0, 0, 0.9 * w);
-    pop();
-
+    noStroke(); //stroke(128);
+    circle(px, py, 0.9 * cellSize);
     return v;
 }
 
 function bit_arr_to_hex_str(bit_arr) {
-
     let hex_str = '';
     for (let i = 0; i < bit_arr.length; i += 8) {
         let byte = 0;
@@ -175,7 +158,7 @@ function hex_str_to_command(hex_str, panel_num, immidiate) {
 }
 
 function update_command() {
-    return '80828F';
+    return '80828F'
 }
 
 function flip_image_y_axis(hex_str1, hex_str2) {
@@ -184,10 +167,8 @@ function flip_image_y_axis(hex_str1, hex_str2) {
     for (let i = 0; i < hex_str1.length; i += 2) {
         curr_byte_1 = hex_str1.slice(i, i + 2);
         curr_byte_2 = hex_str2.slice(i, i + 2);
-
         curr_byte_1_inverted = (~parseInt(curr_byte_1, 16)).toString(16).padStart(2, '0');
         curr_byte_2_inverted = (~parseInt(curr_byte_2, 16)).toString(16).padStart(2, '0');
-
         flipped_hex_str1 += curr_byte_2_inverted;
         flipped_hex_str2 += curr_byte_1_inverted;
     }
@@ -197,20 +178,15 @@ function flip_image_y_axis(hex_str1, hex_str2) {
 function process_and_send_signal() {
     let hexStr1 = bit_arr_to_hex_str(panel_1_bits);
     let hexStr2 = bit_arr_to_hex_str(panel_2_bits);
-
     // [hexStr1, hexStr2] = flip_image_y_axis(hexStr1, hexStr2);
-
     let command1 = hex_str_to_command(hexStr1, 1, false);
     let command2 = hex_str_to_command(hexStr2, 2, false);
 
-    send_signal(command1);
-    send_signal(command2);
-
-    send_signal(update_command());
-}
-
-function keyPressed() {
-
+    if (ENABLE_TX) {
+        send_signal(command1);
+        send_signal(command2);
+        send_signal(update_command());
+    }
 }
 
 function send_signal(hexString) {
@@ -224,6 +200,6 @@ function send_signal(hexString) {
             })
         })
         .then(response => response.text())
-        // .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        // .then(data => print(data))
+        .catch(error => print('Error:', error));
 }

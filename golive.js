@@ -11,6 +11,8 @@ python_server.stderr.on('data', (data) => {
   console.error(`Python Server Error: ${data}`);
 });
 
+console.log('serving local server on port 8081');
+
 // Start the Node.js server
 const nodeServer = exec('node server.js', { cwd: __dirname });
 
