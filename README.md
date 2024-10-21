@@ -43,11 +43,9 @@ $ node golive.js
 and navigate to http://localhost:8000/ in your favorite web browser
 
 ## writing to the flipdot display
-this repo implements two ways to get the flipdot display to flip dots:
-1. tixy
-2. canvas
+this repo implements two ways to get the flipdot display to flip dots: **tixy** and **canvas**
 
-**tixy** is a p5 implementation of [tixy.land](https://tixy.land/), and allows you to write pixel-based expression to control the display from the browser. 
+**tixy** is a p5 implementation of [tixy.land](https://tixy.land/), which allows you to write pixel-based expression to control the display from the browser. 
 
 To use it, launch the program and navigate to http://localhost:8000/tixy
 
@@ -58,3 +56,22 @@ The source code can be found in `./tixy/sketch.js`, but doesn't need to be edite
 To use it, launch the program and navigate to http://localhost:8000/canvas
 
 don't open both at the same time, obviously. 
+
+## project structure
+you should only need to edit the contents of `canvas` to control the display within the scope of this project, but here is the project structure the which may be helpful if you decide to fork this repo and make something crazy
+```
+p5-flipdots/
+├── index.html # home page
+├── canvas/ # the canvas control method (as described above)
+│   ├── index.html
+│   └── sketch.js
+├── tixy/ # the tixy control method (as described above)
+│   ├── index.html
+│   └── sketch.js
+├── libs/
+│   └── flipdot.js # functions for processing data and casting to the dispaly (imported by */index.html)
+│   └── server.js # launches the node server, used for serial communication (called by golive.js)
+│   └── server.py # launches the python server, used to run p5 (called by golive.js)
+├── golive.js # does the thing
+└── node_modules, package.json, docs, assets, etc... # other stuff
+```
