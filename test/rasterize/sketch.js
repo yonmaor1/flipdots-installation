@@ -1,21 +1,22 @@
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(28 * 28, 14 * 28);
 	// noLoop()
 }
 
 function draw() {
-	background(240);
+	background(220);
 	fill('black')
 	stroke('black')
 	ellipse(mouseX, mouseY, mouseX)
 
-	let width_out = int(width / 100);
+	let width_out = 28;
+	let height_out = 14;
 
-	rasterized_brightnesses = rasterize(width, height, width_out);
+	rasterized_brightnesses = rasterize(width, height, width_out, height_out);
 	draw_rasterized_image(rasterized_brightnesses, width_out);
 }
 
-function rasterize(width_in, height_in, width_out, height_out = Infinity) {
+function rasterize(width_in, height_in, width_out, height_out) {
 	/**
 	 * calculate the avarage brightness in each section of the canvas
 	 * 
@@ -26,12 +27,12 @@ function rasterize(width_in, height_in, width_out, height_out = Infinity) {
 	 * return: 1D array of brightnesses
 	 */
 
-	pixels_per_col_out = int(width_in / width_out);
-	height_out = min(height_out, int(height_in / pixels_per_col_out));
+	let pixels_per_col_out = int(width_in / width_out);
+	// height_out = min(height_out, int(height_in / pixels_per_col_out));
 
 	loadPixels();
-	pd = pixelDensity();
-	background(240);
+	let pd = pixelDensity();
+	// background(240);
 
 	// create an array to store the brightnesses
 	let rasterized_brightnesses = []

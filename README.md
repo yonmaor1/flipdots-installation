@@ -1,6 +1,8 @@
 # p5-flipdots
 an API to allow p5.js to control a flip-dot display
 
+written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon University, Fall 2024
+
 ![Demo](./docs/tixy_demo.gif)
 
 ## setup instructions
@@ -39,3 +41,20 @@ $ node golive.js
 ``` 
 
 and navigate to http://localhost:8000/ in your favorite web browser
+
+## writing to the flipdot display
+this repo implements two ways to get the flipdot display to flip dots:
+1. tixy
+2. canvas
+
+**tixy** is a p5 implementation of [tixy.land](https://tixy.land/), and allows you to write pixel-based expression to control the display from the browser. 
+
+To use it, launch the program and navigate to http://localhost:8000/tixy
+
+The source code can be found in `./tixy/sketch.js`, but doesn't need to be edited in order to cast data in this way.
+
+**canvas** leverages p5 to allow you to cast any existing p5 sketch onto the display. To use it, navigate to `./canvas/sketch.js` and write your p5 sketch in there, ensuring that `canvas2display()` is called at the end of the `draw()` function (or wherever you would like to cast the canvas to the display).
+
+To use it, launch the program and navigate to http://localhost:8000/canvas
+
+don't open both at the same time, obviously. 
