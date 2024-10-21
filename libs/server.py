@@ -3,8 +3,9 @@
 
 import http.server
 import socketserver
+import sys
 
-PORT = 8081
+PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8081
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):

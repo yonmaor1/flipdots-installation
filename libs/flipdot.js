@@ -58,6 +58,25 @@ function tixy2display() {
 }
 
 function canvas2display() {
+
+    let rasterized_brightnesses = rasterize(width, height, NUM_COLS, NUM_ROWS);
+
+    panel_0_bits = [];
+    panel_1_bits = [];
+    for (let x = 0; x < NUM_COLS; x++) {
+        for (let y = 0; y < NUM_ROWS; y++) {
+            let i = x + y * NUM_COLS;
+
+            let bit = rasterized_brightnesses[i];
+
+            if (y < 7) {
+                panel_1_bits.push(bit);
+            } else {
+                panel_0_bits.push(bit);
+            }
+        }
+    }
+    
     process_and_send_signal();
 }
 
@@ -72,11 +91,11 @@ function send_signal(hexString) {
             })
         })
         .then(response => response.text())
-        .then(data => print(data))
+        // .then(data => print(data))
         .catch(error => print('Error:', error));
 }
 
-// canvas functions // 
+// canvas functions //
 
 function rasterize(width_in, height_in, width_out, height_out = Infinity) {
 	/**
@@ -94,7 +113,6 @@ function rasterize(width_in, height_in, width_out, height_out = Infinity) {
 
 	loadPixels();
 	let pd = pixelDensity();
-	background(240);
 
 	// create an array to store the brightnesses
 	let rasterized_brightnesses = []
@@ -130,7 +148,6 @@ function rasterize(width_in, height_in, width_out, height_out = Infinity) {
 	// calculate the average brightness
 	for (let i = 0; i < height_out * width_out; i++) {
 		rasterized_brightnesses[i] = round(rasterized_brightnesses[i] / (pixels_per_col_out * pixels_per_col_out));
-		
 	}
 
 	return rasterized_brightnesses;
@@ -145,6 +162,8 @@ function transpose_1d(arr, ncols) {
             transposed.push(arr[j * ncols + i]);
         }
     }
+
+    return transposed;
 }
 
 function draw_rasterized_image(rasterized_brightnesses, width_out) {

@@ -3,7 +3,7 @@
 let function_field;
 let canvas;
 
-let f_str = 'Math.sin(t-Math.sqrt((x-7.5)**2+(y-6)**2))';
+let f_str = 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
 let color_func = eval(`(x,y,i,t) => ${f_str}`);
 
 let frames_since = 0;
