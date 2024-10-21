@@ -9,7 +9,7 @@ const UPDATE_ALL_PANELS = '82';
 const PANEL_ADDR = ['00', '3F'];
 const ADDR_ALL_PANELS = 'FF';
 
-const ENABLE_TX = false; // set to true to enable sending signals to flipdot display
+const ENABLE_TX = true; // set to true to enable sending signals to flipdot display
 
 let panel_0_bits = [];
 let panel_1_bits = [];
@@ -19,7 +19,7 @@ function bit_arr_to_hex_str(bit_arr) {
     for (let i = 0; i < bit_arr.length; i += 7) {
         let byte = 0;
         for (let j = 0; j < 7; j++) {
-            byte += bit_arr[i + 6 - j] * Math.pow(2, j);
+            byte += bit_arr[i + j] * Math.pow(2, j);
         }
         hex_str += byte.toString(16).padStart(2, '0');
     }
@@ -36,7 +36,7 @@ function hex_str_to_command(hex_str, panel_num, immidiate) {
 }
 
 function update_command() {
-    return START + UPDATE_ALL_PANELS + END;
+    return START_BYTE + UPDATE_ALL_PANELS + END_BYTE;
 }
 
 function process_and_send_signal() {
@@ -72,7 +72,7 @@ function send_signal(hexString) {
             })
         })
         .then(response => response.text())
-        // .then(data => print(data))
+        .then(data => print(data))
         .catch(error => print('Error:', error));
 }
 
