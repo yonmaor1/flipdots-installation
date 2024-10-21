@@ -10,10 +10,10 @@ python_server.stdout.on('data', (data) => {
 });
 
 python_server.stderr.on('data', (data) => {
-  console.error(`Python Server Error: ${data}`);
+//   console.error(`Python Server Error: ${data}`);
 });
 
-console.log('serving local server on port ' + port);
+console.log(`serving local server at http://localhost:${port}`);
 
 // Start the Node.js server
 const nodeServer = exec('node ./libs/server.js', { cwd: __dirname });
