@@ -29,7 +29,7 @@ app.post('/send-signal', (req, res) => {
       console.error('Error writing to serial port:', err.message);
       res.status(500).send('Error writing to serial port');
     } else {
-      console.log('Signal sent to serial port');
+      // console.log('Signal sent to serial port');
       res.send('Signal sent to serial port');
     }
   });

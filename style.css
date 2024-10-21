@@ -1,0 +1,21 @@
+body {
+    margin: 0; 
+    overflow-y: hidden;
+}
+
+input {
+    font-size: 24pt;
+    font-family: monospace;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+input:focus {
+    outline: none;
+    border: none;
+}
