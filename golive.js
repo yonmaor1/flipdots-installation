@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 
 // Start the Python server
-const python_server = exec('python3 -m http.server 8000', { cwd: __dirname });
+const python_server = exec('python3 server.py', { cwd: __dirname });
 
 python_server.stdout.on('data', (data) => {
   console.log(`Python Server: ${data}`);
