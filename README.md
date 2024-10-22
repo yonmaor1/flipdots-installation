@@ -44,7 +44,7 @@ and navigate to http://localhost:8081/ in your favorite web browser
 
 ### hardware setup
 
-a 28x14 panel is really two 28x7 panels on top of each other, and each panel must be addressed seperately. The addresses are set DIP switches of the back of the panel. I reccoment setting to top panel to address 0x00 (all switches OFF) and the bottom pannel to 0x3F (all switches ON). If you choose to change this for some reason, you'll need to update the `PANEL_ADDRS` variable in `lib/flipdot.js` to the correct hexadecimal representation of whatever address you choose.
+a 28x14 panel is really two 28x7 panels on top of each other, and each panel must be addressed seperately. The addresses are set via DIP switches of the back of the panels. I reccomend setting the top panel to address 0x00 (all switches OFF) and the bottom pannel to 0x3F (all switches ON). If you choose to change this for some reason, you'll need to update the `PANEL_ADDRS` variable in `lib/flipdot.js` to the correct hexadecimal representation of whatever address you choose.
 
 ## writing to the flipdot display
 this repo implements two ways to get the flipdot display to flip dots: **tixy** and **canvas**
