@@ -58,7 +58,7 @@ To use it, launch the program and navigate to http://localhost:8081/canvas
 don't open both at the same time, obviously. 
 
 ## project structure
-you should only need to edit the contents of `canvas` to control the display within the scope of this project, but here is the project structure the which may be helpful if you decide to fork this repo and make something crazy
+you should only need to edit the contents of `canvas` to control the display within the scope of this project, but here is the project structure which may be helpful if you decide to fork this repo and make something crazy
 ```
 p5-flipdots/
 ├── index.html # home page
