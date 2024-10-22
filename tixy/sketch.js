@@ -75,6 +75,9 @@ function func_input() {
         print("failed again")
         color_func = eval(`(x, y, i, t, P) => ${prev_f_str}`);
         f_str = prev_f_str;
+        for (let i = 0; i < NUM_COLS * NUM_ROWS; i++) {
+            pixs[i] = 0
+        }
     }
 
 }
