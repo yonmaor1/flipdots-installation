@@ -6,7 +6,7 @@ const END_BYTE = '8F';
 const CAST_AND_UPDATE = '83';
 const CAST_AND_STORE = '84';
 const UPDATE_ALL_PANELS = '82';
-const PANEL_ADDR = ['00', '3F'];
+const PANEL_ADDRS = ['00', '3F'];
 const ADDR_ALL_PANELS = 'FF';
 
 const ENABLE_TX = false; // set to true to enable sending signals to flipdot display
@@ -29,7 +29,7 @@ function bit_arr_to_hex_str(bit_arr) {
 function hex_str_to_command(hex_str, panel_num, immidiate) {
     let command = START_BYTE;
     command += immidiate ? CAST_AND_UPDATE : CAST_AND_STORE;
-    command += PANEL_ADDR[panel_num];
+    command += PANEL_ADDRS[panel_num];
     command += hex_str;
     command += END_BYTE;
     return command;
