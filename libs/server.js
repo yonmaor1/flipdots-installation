@@ -19,6 +19,13 @@ const serialPort = new SerialPort({
 app.use(bodyParser.json());
 app.use(cors());
 
+process.on('uncaughtException', (err) => {
+  if (err.message.includes(`cannot open ${serialPortPath}`)) {
+    console.error(`SerialPortNotFoundError: Serial port ${serialPortPath} not found`);
+    process.exit(1);
+  }
+});
+
 app.post('/send-signal', (req, res) => {
   const { hexString } = req.body;
   const byteArray = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));

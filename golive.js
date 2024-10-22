@@ -19,9 +19,13 @@ console.log(`serving local server at http://localhost:${port}`);
 const nodeServer = exec('node ./libs/server.js', { cwd: __dirname });
 
 nodeServer.stdout.on('data', (data) => {
-//   console.log(`Node.js Server: ${data}`);
+    //console.log(`Node.js Server: ${data}`);
 });
 
 nodeServer.stderr.on('data', (data) => {
-  console.error(`Node.js Server Error: ${data}`);
+    if (data.includes('SerialPortNotFoundError')) {
+        console.error(data);
+        process.exit(1);
+    }
+    console.error(`Node.js Server Error: ${data}`);
 });
