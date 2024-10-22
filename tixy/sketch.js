@@ -35,7 +35,12 @@ function is_valid_function(f_str) {
     try {
         // try to create a new function with the provided string
         let test_f = new Function(`return (x, y, i, t, P) => ${f_str}`);
-        test_f()(0, 0, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        let test_value = test_f()(0, 0, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+        if (typeof test_value != 'number' || typeof test_value != 'boolean') {
+            return false;
+        }
+        
         return true;
     } catch (e) {
         return false;
