@@ -124,7 +124,7 @@ function get_prev_bits(index) {
             if (prev_bit_x < 0 || prev_bit_x >= NUM_COLS || prev_bit_y < 0 || prev_bit_y >= NUM_ROWS) {
                 prev_bits.push(0);
             } else {
-                prev_bits.push(pixs[(x + i) + (y + j) * NUM_COLS]);
+                prev_bits.push(pixs[(x + j) + (y + i) * NUM_COLS]);
             }
         }
     }
@@ -137,11 +137,12 @@ function draw_tixy_grid(f) {
     panel_0_bits = [];
     panel_1_bits = [];
 
+    let P = pixs;
     for (let x = 0; x < NUM_COLS; x++) {
         for (let y = 0; y < NUM_ROWS; y++) {
             let i = x + y * NUM_COLS;
             let t = frames_since;
-            let P = get_prev_bits(i);
+            // let P = get_prev_bits(i);
             
             let bit = draw_tixy_cell(x, y, i, t, P, f);
             pixs[i] = bit;
