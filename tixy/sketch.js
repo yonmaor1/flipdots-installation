@@ -27,8 +27,6 @@ function setup() {
 }
 
 function is_valid_function(f_str) {
-
-    print(f_str);
     
     if (!f_str) {
         return false;
@@ -40,7 +38,6 @@ function is_valid_function(f_str) {
         test_f()(0, 0, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
         return true;
     } catch (e) {
-        print(e)
         return false;
     }
 }
@@ -72,7 +69,7 @@ function func_input() {
             }
         }
     } else {
-        print("failed again")
+        // print("failed again")
         color_func = eval(`(x, y, i, t, P) => ${prev_f_str}`);
         f_str = prev_f_str;
         for (let i = 0; i < NUM_COLS * NUM_ROWS; i++) {
