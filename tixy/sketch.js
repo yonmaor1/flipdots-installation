@@ -26,6 +26,28 @@ function setup() {
     }
 }
 
+function draw() {
+    background(0);
+    noStroke();
+    fill(64);
+    rect(0, 0, width, height);
+
+    draw_info();
+    func_input()
+    draw_tixy_grid(color_func);
+
+    tixy2display();
+    
+    frames_since += 1;
+}
+
+/**
+ * @brief check if the provided string is a valid function
+ * 
+ * @param {string} f_str string to check
+ * 
+ * @returns {boolean} true if the provided string is a valid function
+ */
 function is_valid_function(f_str) {
     
     if (!f_str) {
@@ -47,6 +69,9 @@ function is_valid_function(f_str) {
     }
 }
 
+/**
+ * @brief eval the function from the input field
+ */
 function func_input() {
 
     let prev_f_str = f_str;
@@ -83,28 +108,18 @@ function func_input() {
 
 }
 
-
+/**
+ * @brief resize the function input field
+ */
 function windowResized() {
     let canvasX = canvas.position().x;
     let canvasY = canvas.position().y;
     function_field.position(canvasX + 20, canvasY + height - 120);
 }
 
-function draw() {
-    background(0);
-    noStroke();
-    fill(64);
-    rect(0, 0, width, height);
-
-    draw_info();
-    func_input()
-    draw_tixy_grid(color_func);
-
-    tixy2display();
-    
-    frames_since += 1;
-}
-
+/**
+ * @brief draw the info text
+ */
 function draw_info() {
     noStroke();
     fill('white');
@@ -114,28 +129,11 @@ function draw_info() {
     text(displayStr, 20, height - 150);
 }
 
-function get_prev_bits(index) {
-
-    let prev_bits = [];
-
-    let x = index % NUM_COLS;
-    let y = Math.floor(index / NUM_COLS);
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            let prev_bit_x = x + i;
-            let prev_bit_y = y + j;
-
-            if (prev_bit_x < 0 || prev_bit_x >= NUM_COLS || prev_bit_y < 0 || prev_bit_y >= NUM_ROWS) {
-                prev_bits.push(0);
-            } else {
-                prev_bits.push(pixs[(x + j) + (y + i) * NUM_COLS]);
-            }
-        }
-    }
-
-    return prev_bits;
-}
-
+/**
+ * @brief draw the tixy grid
+ * 
+ * @param {function} f function to determine the color of each cell
+ */
 function draw_tixy_grid(f) {
     // clear the panels
     panel_0_bits = [];
@@ -166,6 +164,17 @@ function draw_tixy_grid(f) {
     }
 }
 
+/**
+ * @brief draw a single tixy cell
+ * 
+ * @param {number} x x coordinate of the cell
+ * @param {number} y y coordinate of the cell
+ * @param {number} i index of the cell
+ * @param {number} t current frame
+ * @param {number[]} P previous bits
+ * 
+ * @returns {number} the value of the cell (0 or 1)
+ */
 function draw_tixy_cell(x, y, i, t, P, f) {
     let margin = 30;
     let gridAreaWidth = (width - 2 * margin);
