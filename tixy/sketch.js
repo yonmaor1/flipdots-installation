@@ -1,15 +1,21 @@
-/** inspired by https://tixy.land/ */
-
-let function_field;
-let canvas;
+// Control software for the Alfa-Zeta XY5 display
+// Created by Yon Maor for Golan Levin's 
+// Fall 2024 Creative Coding course (60-212) at CMU
+// More info: https://github.com/yonmaor1/p5-flipdots 
+// Inspired by https://tixy.land/ by Martin Kleppe
+//
+// Requires the library: 
+// https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js
 
 let f_str = 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
+
 let color_func = eval(`(x,y,i,t,P) => ${f_str}`);
-
+let function_field;
+let canvas;
 let frames_since = 0;
+let pixs = [];
 
-let pixs = []
-
+//------------------------------------------------------------
 function setup() {
     canvas = createCanvas(800, 600);
     frameRate(15);
@@ -17,7 +23,7 @@ function setup() {
     function_field = createElement('textarea');
     function_field.size(750, 100);
     function_field.position(20, height - 120);
-    function_field.style('font-size', '16px'); // Adjust the font size here
+    function_field.style('font-size', '16px');
     function_field.value(f_str);
     windowResized();
 
@@ -26,6 +32,7 @@ function setup() {
     }
 }
 
+//------------------------------------------------------------
 function draw() {
     background(0);
     noStroke();
@@ -41,6 +48,7 @@ function draw() {
     frames_since += 1;
 }
 
+//------------------------------------------------------------
 /**
  * @brief check if the provided string is a valid function
  * 
@@ -69,6 +77,7 @@ function is_valid_function(f_str) {
     }
 }
 
+//------------------------------------------------------------
 /**
  * @brief eval the function from the input field
  */
@@ -108,6 +117,7 @@ function func_input() {
 
 }
 
+//------------------------------------------------------------
 /**
  * @brief resize the function input field
  */
@@ -117,6 +127,7 @@ function windowResized() {
     function_field.position(canvasX + 20, canvasY + height - 120);
 }
 
+//------------------------------------------------------------
 /**
  * @brief draw the info text
  */
@@ -129,6 +140,7 @@ function draw_info() {
     text(displayStr, 20, height - 150);
 }
 
+//------------------------------------------------------------
 /**
  * @brief draw the tixy grid
  * 
@@ -164,6 +176,7 @@ function draw_tixy_grid(f) {
     }
 }
 
+//------------------------------------------------------------
 /**
  * @brief draw a single tixy cell
  * 
