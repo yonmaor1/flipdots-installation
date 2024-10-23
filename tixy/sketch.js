@@ -1,6 +1,7 @@
 // Control software for the Alfa-Zeta XY5 display
 // Created by Yon Maor for Golan Levin's 
 // Fall 2024 Creative Coding course (60-212) at CMU
+// Developed at the CMU STUDIO for Creative Inquiry
 // More info: https://github.com/yonmaor1/p5-flipdots 
 // Inspired by https://tixy.land/ by Martin Kleppe
 // 
