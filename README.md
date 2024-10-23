@@ -5,6 +5,19 @@ written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon Universi
 
 ![Demo](./docs/tixy_demo.gif)
 
+## quickstart
+
+```
+$ git clone https://github.com/yonmaor1/p5-flipdots.git
+$ cd p5-flipdots
+$ npm init -y
+$ npm install body-parser@1.20.3 concurrently@9.0.1 cors@2.8.5 express@4.21.1 serialport@12.0.0
+$ npm list
+$ node golive.js
+$ open http://localhost:8081/
+```
+
+
 ## setup instructions
 fire up your favorite terminal, cd somewhere comfortable and clone this repo
 ```

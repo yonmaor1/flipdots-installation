@@ -22,7 +22,7 @@ function setup() {
     windowResized();
 
     for (let i = 0; i < NUM_COLS * NUM_ROWS; i++) {
-        pixs.push(0)
+        pixs.push(0);
     }
 }
 
@@ -33,7 +33,7 @@ function draw() {
     rect(0, 0, width, height);
 
     draw_info();
-    func_input()
+    func_input();
     draw_tixy_grid(color_func);
 
     tixy2display();
@@ -84,25 +84,25 @@ function func_input() {
             color_func = eval(`(x, y, i, t, P) => ${f_str}`);
             frames_since = 0;
             for (let i = 0; i < NUM_COLS * NUM_ROWS; i++) {
-                pixs[i] = 0
+                pixs[i] = 0;
             }
         } catch (e) { // probably in the middle of typing
             try {
                 color_func = eval(`(x, y, i, t, P) => ${prev_f_str}`);
                 f_str = prev_f_str;
                 for (let i = 0; i < NUM_COLS * NUM_ROWS; i++) {
-                    pixs[i] = 0
+                    pixs[i] = 0;
                 }
             } catch (e) { // something went wrong
                 color_func = () => 0; // fallback to a default function
-                f_str = '0'
+                f_str = '0';
             }
         }
     } else {
         color_func = eval(`(x, y, i, t, P) => ${prev_f_str}`);
         f_str = prev_f_str;
         for (let i = 0; i < NUM_COLS * NUM_ROWS; i++) {
-            pixs[i] = 0
+            pixs[i] = 0;
         }
     }
 
