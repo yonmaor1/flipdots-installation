@@ -3,13 +3,15 @@
 // Fall 2024 Creative Coding course (60-212) at CMU
 // More info: https://github.com/yonmaor1/p5-flipdots 
 // Inspired by https://tixy.land/ by Martin Kleppe
-//
-// Requires the library: 
+// 
+// Requires the file: flipdot.js
+// Requires the p5.js and p5.serialport.js libraries:
+// https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.js
 // https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js
 
 let f_str = 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
-
 let color_func = eval(`(x,y,i,t,P) => ${f_str}`);
+
 let function_field;
 let canvas;
 let frames_since = 0;
