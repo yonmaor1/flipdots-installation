@@ -88,6 +88,10 @@ function func_input() {
 
     let prev_f_str = f_str;
     f_str = function_field.value();
+    f_str = parse_function(f_str);
+
+    print(f_str);
+
     if (f_str == prev_f_str) {
         return;
     }
@@ -118,6 +122,18 @@ function func_input() {
         }
     }
 
+}
+
+function getP(i) {
+    // i = i % (NUM_COLS * NUM_ROWS);
+    if (i < 0 || i >= NUM_COLS * NUM_ROWS) {
+        return 0;
+    }
+    return pixs[i];
+}
+
+function parse_function(f_str) {
+    return f_str.replace(/P/g, 'getP').replace(/\[/g, '(').replace(/\]/g, ')');
 }
 
 //------------------------------------------------------------
@@ -155,6 +171,7 @@ function draw_tixy_grid(f) {
     panel_1_bits = [];
 
     let P = pixs;
+    let tmp_pixs = []
     for (let x = 0; x < NUM_COLS; x++) {
         for (let y = 0; y < NUM_ROWS; y++) {
             let i = x + y * NUM_COLS;
@@ -162,7 +179,8 @@ function draw_tixy_grid(f) {
             // let P = get_prev_bits(i);
             
             let bit = draw_tixy_cell(x, y, i, t, P, f);
-            pixs[i] = bit;
+            tmp_pixs[i] = bit;
+            // P[i] = bit;
 
             // if (y == 0) {
             //     panel_1_bits.push(0);
@@ -177,6 +195,8 @@ function draw_tixy_grid(f) {
             }
         }
     }
+
+    pixs = tmp_pixs;
 }
 
 //------------------------------------------------------------
