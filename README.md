@@ -29,8 +29,7 @@ ensure you have [npm installed](https://docs.npmjs.com/downloading-and-installin
 
 run
 ```
-$ npm init -y
-$ npm install body-parser@1.20.3 concurrently@9.0.1 cors@2.8.5 express@4.21.1 serialport@12.0.0
+$ npm install
 ```
 
 ensure this worked by running
