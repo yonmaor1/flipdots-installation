@@ -9,12 +9,25 @@ const port = 3000;
 const serialPortPath = '/dev/tty.usbserial-A9E7G8FR'; // Replace with your serial port path
 const baudRate = 57600;
 
-
 const serialPort = new SerialPort({
-  path : serialPortPath,
-  baudRate : baudRate,
+  path: serialPortPath,
+  baudRate: baudRate,
+  // autoOpen: false,
 });
 
+// serialPort.open(function (err) {
+//   console.log('opening serial port');
+//   if (err) {
+//     return console.log("Error opening port: ", err.message);
+//   }
+
+//   port.write("main screen turn on", function (err) {
+//     if (err) {
+//       return console.log("Error on write: ", err.message);
+//     }
+//     console.log("message written");
+//   });
+// });
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -27,7 +40,8 @@ process.on('uncaughtException', (err) => {
 });
 
 app.post('/send-signal', (req, res) => {
-  const { hexString } = req.body;
+  console.log(req.body.command);
+  const hexString = req.body.command;
   const byteArray = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
   const buffer = Buffer.from(byteArray);
 

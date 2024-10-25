@@ -9,7 +9,7 @@ const UPDATE_ALL_PANELS = '82';
 const PANEL_ADDRS = ['00', '3F'];
 const ADDR_ALL_PANELS = 'FF';
 
-const ENABLE_TX = false; // set to true to enable sending signals to flipdot display
+const ENABLE_TX = true; // set to true to enable sending signals to flipdot display
 
 let panel_0_bits = [];
 let panel_1_bits = [];

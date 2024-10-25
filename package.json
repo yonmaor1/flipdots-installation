@@ -1,21 +1,19 @@
 {
   "name": "p5-flipdots",
   "version": "1.0.0",
-  "description": "an API to allow p5.js to control a flip-dot display",
-  "main": "server.js",
+  "description": "control a flip-dot display via p5.js",
+  "main": "golive.js",
   "directories": {
-    "test": "test"
+    "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yonmaor1/p5-flipdots.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Yon Maor",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yonmaor1/p5-flipdots/issues"
@@ -26,6 +24,8 @@
     "concurrently": "^9.0.1",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "install": "^0.13.0",
+    "npm": "^10.9.0",
     "serialport": "^12.0.0"
   }
 }

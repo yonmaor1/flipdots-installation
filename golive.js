@@ -19,7 +19,7 @@ console.log(`serving local server at http://localhost:${port}`);
 const nodeServer = exec('node ./libs/server.js', { cwd: __dirname });
 
 nodeServer.stdout.on('data', (data) => {
-    //console.log(`Node.js Server: ${data}`);
+    // console.log(`Node.js Server: ${data}`);
 });
 
 nodeServer.stderr.on('data', (data) => {
