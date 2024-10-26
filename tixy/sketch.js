@@ -122,6 +122,13 @@ function func_input() {
 
 }
 
+/**
+ * @brief get the value of the pixel at index i, or 0 if i is out of bounds
+ * 
+ * @param {number} i index of the pixel
+ * 
+ * @returns {number} value of the pixel
+ */
 function getP(i) {
     // i = i % (NUM_COLS * NUM_ROWS);
     if (i < 0 || i >= NUM_COLS * NUM_ROWS) {
@@ -130,6 +137,13 @@ function getP(i) {
     return pixs[i];
 }
 
+/**
+ * @brief parse the function string to replace P[i] with getP(i)
+ * 
+ * @param {string} f_str function string
+ * 
+ * @returns {string} parsed function string
+ */
 function parse_function(f_str) {
     return f_str.replace(/P/g, 'getP').replace(/\[/g, '(').replace(/\]/g, ')');
 }
