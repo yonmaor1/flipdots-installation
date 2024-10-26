@@ -5,18 +5,16 @@ written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon Universi
 
 ![Demo](./docs/tixy_demo.gif)
 
-## quickstart
+## tldr
 
 ```
 $ git clone https://github.com/yonmaor1/p5-flipdots.git
 $ cd p5-flipdots
-$ npm init -y
-$ npm install body-parser@1.20.3 concurrently@9.0.1 cors@2.8.5 express@4.21.1 serialport@12.0.0
+$ npm install
 $ npm list
 $ node golive.js
 $ open http://localhost:8081/
 ```
-
 
 ## setup instructions
 fire up your favorite terminal, cd somewhere comfortable and clone this repo
@@ -49,10 +47,13 @@ p5-flipdots@1.0.0 /path/to/p5-flipdots
 
 to launch the program, run
 ```
-$ node golive.js
+$ node golive.js [-v : optional, enables verbose mode]
 ``` 
 
 and navigate to http://localhost:8081/ in your favorite web browser
+
+### note on dependencies breaking
+sometimes (after git pulling, or running the program several times), you may get `Cannot find module 'module'` errors when trying to launch the program. Running `npm list` after this will likely show a much longer list then the one above, with many packages listed as `extraneous`. Re-running `npm install` will likely fix this.
 
 ### hardware setup
 
