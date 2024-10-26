@@ -60,6 +60,7 @@ function update_command() {
     return START_BYTE + UPDATE_ALL_PANELS + END_BYTE;
 }
 
+let sent_first_signal = false;
 function process_and_send_signal() {
     let hexStr0 = bit_arr_to_hex_str(panel_0_bits);
     let hexStr1 = bit_arr_to_hex_str(panel_1_bits);
@@ -71,6 +72,9 @@ function process_and_send_signal() {
         send_signal(command0);
         send_signal(command1);
         send_signal(update_command());
+    } else if (!sent_first_signal) {
+        send_signal('TX_OFF');
+        sent_first_signal = true;
     }
 }
 

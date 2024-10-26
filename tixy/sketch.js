@@ -90,8 +90,6 @@ function func_input() {
     f_str = function_field.value();
     f_str = parse_function(f_str);
 
-    print(f_str);
-
     if (f_str == prev_f_str) {
         return;
     }
