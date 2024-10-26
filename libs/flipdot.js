@@ -15,7 +15,7 @@ let panel_0_bits = [];
 let panel_1_bits = [];
 
 /**
- * @breif convert a bit array to a hex string
+ * @brief convert a bit array to a hex string
  * 
  * @param {[number]} bit_arr array of bits
  * @returns {string} hex string
@@ -33,7 +33,7 @@ function bit_arr_to_hex_str(bit_arr) {
 }
 
 /**
- * @breif convert a hex string to a command for the flipdot display
+ * @brief convert a hex string to a command for the flipdot display
  * 
  * @param {string} hex_str hex string
  * @param {number} panel_num panel number (not the address)
@@ -75,14 +75,14 @@ function process_and_send_signal() {
 }
 
 /**
- * @breif cast the tixy grid to the flipdot display
+ * @brief cast the tixy grid to the flipdot display
  */
 function tixy2display() {
     process_and_send_signal();
 }
 
 /**
- * @breif cast the canvas contents to the flipdot display
+ * @brief cast the canvas contents to the flipdot display
  */
 function canvas2display() {
 
@@ -108,7 +108,7 @@ function canvas2display() {
 }
 
 /**
- * @breif send a signal to the node server display
+ * @brief send a signal to the node server display
  * 
  * @param {string} command command to send
  */
@@ -130,7 +130,7 @@ function send_signal(command) {
 // canvas functions //
 
 /**
- * @breif calculate the avarage brightness in each section of the canvas
+ * @brief calculate the avarage brightness in each section of the canvas
  * 
  * @param {number} width_in width of canvas
  * @param {number} height_in height of the canvas
@@ -187,7 +187,7 @@ function rasterize(width_in, height_in, width_out, height_out = Infinity) {
 }
 
 /**
- * @breif draw the rasterized image
+ * @brief draw the rasterized image
  * 
  * @param {[number]} rasterized_brightnesses brightnesses
  * @param {number} width_out width of the output image (ncols in the flip dot display)
