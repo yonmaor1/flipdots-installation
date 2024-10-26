@@ -7,11 +7,18 @@ written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon Universi
 
 ## quickstart
 
+We're using the following equipment: 
+
+* [Alfa-Zeta XY5 Flipdot display, 28x14 pixels, 13.5mm dots](https://flipdots.com/en/products-services/flip-dot-boards-xy5/) (about $500)
+* [USB-C to RS485/RS422 Serial Port Converter](https://www.amazon.com/OIKWAN-Converter-Adapter-Supports-Windows/dp/B0CS35249T/) ($22)
+* [24V DC power supply](https://www.amazon.com/Auplf-Supply-Adapter-100-240V-Cameras/dp/B088897J2D/) ($17)
+
+In Terminal: 
+
 ```
 $ git clone https://github.com/yonmaor1/p5-flipdots.git
 $ cd p5-flipdots
-$ npm init -y
-$ npm install body-parser@1.20.3 concurrently@9.0.1 cors@2.8.5 express@4.21.1 serialport@12.0.0
+$ npm install
 $ npm list
 $ node golive.js
 $ open http://localhost:8081/
