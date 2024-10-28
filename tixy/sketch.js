@@ -10,7 +10,7 @@
 // https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.js
 // https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js
 
-const ENABLE_TX = false; // set to true to enable sending signals to flipdot display
+const ENABLE_TX = true; // set to true to enable sending signals to flipdot display
 
 let f_str = 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
 let color_func = eval(`(x,y,i,t,P) => ${f_str}`);
