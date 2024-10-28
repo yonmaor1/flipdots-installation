@@ -5,7 +5,7 @@ written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon Universi
 
 ![Demo](./docs/tixy_demo.gif)
 
-## quickstart
+## tldr
 
 We're using the following equipment: 
 
@@ -23,7 +23,6 @@ $ npm list
 $ node golive.js
 $ open http://localhost:8081/
 ```
-
 
 ## setup instructions
 fire up your favorite terminal, cd somewhere comfortable and clone this repo
@@ -56,10 +55,13 @@ p5-flipdots@1.0.0 /path/to/p5-flipdots
 
 to launch the program, run
 ```
-$ node golive.js
+$ node golive.js [-v : optional, enables verbose mode]
 ``` 
 
 and navigate to http://localhost:8081/ in your favorite web browser
+
+### note on dependencies breaking
+sometimes (after git pulling, or running the program several times), you may get `Cannot find module 'module'` errors when trying to launch the program. Running `npm list` after this will likely show a much longer list then the one above, with many packages listed as `extraneous`. Re-running `npm install` will likely fix this.
 
 ### hardware setup
 

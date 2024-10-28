@@ -23,6 +23,8 @@
 // Inspired by https://tixy.land/ by Martin Kleppe
 
 
+const ENABLE_TX = true; // set to true to enable sending signals to flipdot display
+
 let f_str = 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
 let color_func = eval(`(x,y,i,t,P) => ${f_str}`);
 
@@ -103,8 +105,6 @@ function func_input() {
     f_str = function_field.value();
     f_str = parse_function(f_str);
 
-    // print(f_str); // debug
-
     if (f_str == prev_f_str) {
         return;
     }
@@ -137,6 +137,13 @@ function func_input() {
 
 }
 
+/**
+ * @brief get the value of the pixel at index i, or 0 if i is out of bounds
+ * 
+ * @param {number} i index of the pixel
+ * 
+ * @returns {number} value of the pixel
+ */
 function getP(i) {
     // i = i % (NUM_COLS * NUM_ROWS);
     if (i < 0 || i >= NUM_COLS * NUM_ROWS) {
@@ -145,6 +152,13 @@ function getP(i) {
     return pixs[i];
 }
 
+/**
+ * @brief parse the function string to replace P[i] with getP(i)
+ * 
+ * @param {string} f_str function string
+ * 
+ * @returns {string} parsed function string
+ */
 function parse_function(f_str) {
     return f_str.replace(/P/g, 'getP').replace(/\[/g, '(').replace(/\]/g, ')');
 }

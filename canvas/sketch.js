@@ -1,3 +1,7 @@
+/** set to true to enable sending signals to flipdot display */
+const ENABLE_TX = false;
+/** */
+
 let capture;
 
 function setup() {

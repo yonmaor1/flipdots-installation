@@ -42,6 +42,13 @@ process.on('uncaughtException', (err) => {
 app.post('/send-signal', (req, res) => {
   console.log(req.body.command);
   const hexString = req.body.command;
+  
+  if (hexString == 'TX_OFF'){
+    console.log('You are no transmitting data to the flipdot display. If this is not intended, please check that ENABLE_TX is set to true in flipdot.js');
+    res.send('Signal sent to serial port');
+    return;
+  }
+
   const byteArray = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
   const buffer = Buffer.from(byteArray);
 
