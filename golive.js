@@ -14,7 +14,11 @@ python_server.stdout.on('data', (data) => {
 });
 
 python_server.stderr.on('data', (data) => {
-    if (verbose) { // maybe this should always be printed
+    if (data.includes('Address already in use')) {
+        console.log(`Port ${port} is already in use`);
+        process.exit(1);
+    }
+    if (verbose){
         console.error(`Python Server Error: ${data}`);
     }
 });

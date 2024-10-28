@@ -14,6 +14,24 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Expires", "0")
         super().end_headers()
 
-with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
-    print("serving at port", PORT)
-    httpd.serve_forever()
+err = None
+
+try:
+    with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
+        print("serving at port", PORT)
+        httpd.serve_forever()
+except OSError as e:
+    err = e
+    i = 0
+    while(err.errno == 48): # Address already in use
+        new_port = PORT + i
+        if new_port > PORT + 10:
+            print('Failed to start server')
+            break
+        try:
+            with socketserver.TCPServer(("", new_port), MyHTTPRequestHandler) as httpd:
+                print("serving at port", new_port)
+                httpd.serve_forever()
+        except OSError as e:
+            err = e
+            i += 1
