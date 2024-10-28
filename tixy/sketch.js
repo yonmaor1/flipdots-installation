@@ -1,14 +1,27 @@
-// Control software for the Alfa-Zeta XY5 display
-// Created by Yon Maor for Golan Levin's 
-// Fall 2024 Creative Coding course (60-212) at CMU
-// Developed at the CMU STUDIO for Creative Inquiry
+// p5 Control software for the Alfa-Zeta XY5 Flipdot display
+// Created by Yon Maor for Golan Levin's Creative Coding
+// course (60-212) at Carnegie Mellon University, Fall 2024
+//
 // More info: https://github.com/yonmaor1/p5-flipdots 
-// Inspired by https://tixy.land/ by Martin Kleppe
-// 
-// Requires the file: flipdot.js
+// https://flipdots.com/en/products-services/flip-dot-boards-xy5/
+// Requires the file: flipdot.js: 
+// https://github.com/yonmaor1/p5-flipdots/blob/main/libs/flipdot.js
 // Requires the p5.js and p5.serialport.js libraries:
 // https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.js
 // https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js
+//
+// Instructions: 
+// 1. Follow node package installation instructions at 
+//    https://github.com/yonmaor1/p5-flipdots/blob/main/README.md
+// 2. Connect powered XY5 to serial port via USB-to-RS485 connector
+// 3. Launch serial communications server: `node golive.js`
+// 4. Ensure ENABLE_TX is true in flipdot.js
+// 5. Run this sketch in the browser, fiddle with the f_str expression!
+//
+// Developed with support from the Frank-Ratchye Further Fund 
+// at the Frank-Ratchye STUDIO for Creative Inquiry at CMU
+// Inspired by https://tixy.land/ by Martin Kleppe
+
 
 const ENABLE_TX = true; // set to true to enable sending signals to flipdot display
 
@@ -168,7 +181,7 @@ function draw_info() {
     noStroke();
     fill('white');
     textSize(16);
-    let displayStr = "// input must be valid javascript expression\n";
+    let displayStr = "// input must be a valid javascript expression\n";
     displayStr += "(x,y,i,t,P) =>";
     text(displayStr, 20, height - 150);
 }
