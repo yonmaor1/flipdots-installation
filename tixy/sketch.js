@@ -23,7 +23,7 @@
 // Inspired by https://tixy.land/ by Martin Kleppe
 
 
-const ENABLE_TX = true; // set to true to enable sending signals to flipdot display
+const ENABLE_TX = false; // set to true to enable sending signals to flipdot display
 
 let f_str = 'sin(t-sqrt((x-7.5)**2+(y-6)**2))';
 let color_func = eval(`(x,y,i,t,P) => ${f_str}`);
