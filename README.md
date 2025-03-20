@@ -3,7 +3,14 @@ an API to allow p5.js to control a flip-dot display
 
 written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon University, Fall 2024
 
-![Demo](./docs/tixy_demo.gif)
+# TODO
+
+- apply for grant (writing + budget)
+- figure out location (enviorment testing, photograph spaces, reach our to facilities)
+- mechanical design (sheet metal mount, acrylic enclosure, dampening)
+- digital hardware (which microcontroller / computer to use, other hardware eg. camera etc.)
+- modify code (lower level, 4 displays, instruction queue...)
+- website (archiving instructions, maybe interactions via website?)
 
 ## tldr
 
