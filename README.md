@@ -1,5 +1,5 @@
 # p5-flipdots
-an API to allow p5.js to control a flip-dot display
+an interactive flipdot installation 
 
 written by Yon Maor at the Studio for Creative Inquiry, Carnegie Mellon University, Fall 2024
 

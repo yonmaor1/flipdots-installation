@@ -1,3 +1,5 @@
+const NUM_PANELS = 2; // this refers to the number of 7x28 panels
+
 const NUM_COLS = 28;
 const NUM_ROWS = 14;
 
@@ -9,8 +11,10 @@ const UPDATE_ALL_PANELS = '82';
 const PANEL_ADDRS = ['00', '3F'];
 const ADDR_ALL_PANELS = 'FF';
 
-let panel_0_bits = [];
-let panel_1_bits = [];
+let panels = [];
+for (let i = 0; i < NUM_PANELS; i++) {
+    panels.push([]);
+}
 
 /**
  * @brief convert a bit array to a hex string
@@ -60,20 +64,22 @@ function update_command() {
 
 let sent_first_signal = false;
 function process_and_send_signal() {
-    let hexStr0 = bit_arr_to_hex_str(panel_0_bits);
-    let hexStr1 = bit_arr_to_hex_str(panel_1_bits);
 
-    let command0 = hex_str_to_command(hexStr0, 0, false);
-    let command1 = hex_str_to_command(hexStr1, 1, false);
+    if (!ENABLE_TX) {
+        if (!sent_first_signal){
+            send_signal('TX_OFF');
+            sent_first_signal = true;
+        }
+        return;
+    } 
 
-    if (ENABLE_TX) {
-        send_signal(command0);
-        send_signal(command1);
-        send_signal(update_command());
-    } else if (!sent_first_signal) {
-        send_signal('TX_OFF');
-        sent_first_signal = true;
+    for (let i = 0; i < NUM_PANELS; i++) {
+        let hex_str = bit_arr_to_hex_str(panels[i]);
+        let command = hex_str_to_command(hex_str, 0, false);
+        send_signal(command);
     }
+
+    send_signal(update_command());
 }
 
 /**
@@ -83,6 +89,7 @@ function tixy2display() {
     process_and_send_signal();
 }
 
+/** CANVAS CASTING -- NOT USED */
 /**
  * @brief cast the canvas contents to the flipdot display
  */
